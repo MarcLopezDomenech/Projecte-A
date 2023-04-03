@@ -27,7 +27,7 @@ int main(){
         %GREDDY, LOCALSERCH, HEURISTIC
             %APROX_ESPERANÇA_GREEDY(graf G, nou S, Joc de prova J, interval de confiança) -> cond. complerta + EXTRA     //Treball Marc
 
-            %GREEDY_IC()-> varaibles de entrada ( graf G, ja activats S, interval de confiança) -> S final  //FALTA
+            %GREEDY_IC()-> varaibles de entrada ( graf G, ja activats S, interval de confiança, probabilitat, interval de confiança) -> S final  //FALTA
             %GREEDY_LT()-> varaibles de entrada ( graf G, ja activats S) -> S final  //Treball Miquel
                 %DIFUSIÓ
                     %DIFUSIO_IC() -> variables de entrada( graf G, ja activats S, nous S , probabilitat) -> quins nodes difosos     //CODI KAMIL
