@@ -6,6 +6,8 @@
 #include "greedyIC.cpp"
 #include "greedyLTgrau.cpp"
 
+#define test_mode = 0;
+
 using namespace std;
 using VI = vector<int>;
 
@@ -74,8 +76,10 @@ int main(int argc, char* argv[]) {
 	    for (int i=0; i<n; ++i) resistencia[i] = ceil(c*G[i].size());
 
         if (alg == "greedy") {
-            cout << greedyLTgrau(G, resistencia, S) << endl;
-            for (auto elem : S) cout << elem << endl;
+            cout <<"Mida S: " <<greedyLTgrau(G, resistencia, S) << endl;
+            cout << "S = [";
+            for (auto elem : S) cout << elem << '|';
+            cout <<']'<<endl;
         }
         else if (alg == "localsearch") {
 
