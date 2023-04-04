@@ -31,7 +31,9 @@ int greedyLTgrau(const vector<VI>& G, const vector<int>& R, vector<int>& S) {
         
         vector<bool> nous_activats = ja_activats_S;
         S.push_back(imax); //L'afegim a S
-        c = difusioLTeficient(G, R, S, 0, act_reb_S, nous_activats);
+        VI aux;
+        aux.push_back(imax);
+        c = difusioLTeficient(G, R, aux, c, act_reb_S, nous_activats);
 
 		for (int i=0; i<n; ++i) {
 			if (nous_activats[i] and not ja_activats_S[i]) { //Traiem les arestes dels vertexs ja activats del grau
@@ -45,6 +47,3 @@ int greedyLTgrau(const vector<VI>& G, const vector<int>& R, vector<int>& S) {
     return S.size();
 }
  
-int main() {
-	return 0;
-}

@@ -4,6 +4,7 @@
 #include <math.h>
 #include "readGraph.cpp"
 #include "greedyIC.cpp"
+#include "greedyLTgrau.cpp"
 
 using namespace std;
 using VI = vector<int>;
@@ -61,7 +62,7 @@ int main(int argc, char* argv[]) {
 
     if (model == "IC") {
         if (alg == "greedy") {
-            greedyIC(G, S, intConf, c);
+            //greedyIC(G, S, intConf, c);
         }
         else if (alg == "localsearch") {
 
@@ -69,8 +70,12 @@ int main(int argc, char* argv[]) {
         else if(alg == "metaheuristic") {}
     }
     else if (model == "LT") {
+        vector<int> resistencia(n); 
+	    for (int i=0; i<n; ++i) resistencia[i] = ceil(c*G[i].size());
+
         if (alg == "greedy") {
-            //greedyLTgrau(G, S, intConf, c);
+            cout << greedyLTgrau(G, resistencia, S) << endl;
+            for (auto elem : S) cout << elem << endl;
         }
         else if (alg == "localsearch") {
 

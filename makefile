@@ -3,11 +3,8 @@ CC = g++
 
 all: main
 
-build/%.o: %.cpp
-	$(CC) $(CFLAGS) -c $< -o $@
-
-main: build/main.o build/readGraph.o build/greedyIC.o
-	$(CC) $(CFLAGS) -o $@ $^
+main: main.cpp
+	$(CC) $(CFLAGS) $< -o $@ 
 
 clean:
 	rm build/*
