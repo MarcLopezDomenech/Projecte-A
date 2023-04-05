@@ -6,7 +6,8 @@
 #include "greedyIC.cpp"
 #include "greedyLTgrau.cpp"
 
-#define test_mode = 0;
+#define test_mode = false;
+#define show_S = false;
 
 using namespace std;
 using VI = vector<int>;
@@ -30,63 +31,77 @@ int main(int argc, char* argv[]) {
         c = stod(argv[3]);
         if (model == "IC") {
             intConf = stod(argv[4]);
-            cout << "Executant el model " << model << " (interval confiança : " << intConf << ")" << " amb l'algorisme " 
-            << alg << " i p: " << c << endl;
+            if (test_mode) {
+                cout << "PARAMETRES: Model " << model << " (interval confiança : " << intConf << "), Algorisme " 
+                << alg << ", Probabilitat: " << c << endl;
+            }
         }
         else {
             intConf = -1;
-            cout << "Executant el model " << model << " amb l'algorisme " << alg << " i p: " << c << endl;
+            if (test_mode) {
+                cout << "PARAMETRES: Model " << model << ", Algorisme " << alg << ", Resistencia: " << c << endl;
+            }
         }
     }
     else {
         usage1();
         return -1;
     }
-    //PARAMATRES ENTRADA //Treball Pol
-    /*
-        %Entrada llista adyacencia
-        %Per defecte S buit
-
-        %Boolea es IC(true) o LT (false)
-            %interval de confiança (per IC)
-        %probabilitat aresta p o llindar
-        %Elecció algoritme
-            %Elecció quin greedy o altre corre
-
-        %Modo testeo
-    */
 
     int n, m;
     n = m = 0;
     vector<VI> G;
+
+    if (test_mode) cout << "Inici lectura graf...";
     readGraphDIMACS(n, m, G);
+    if (test_mode) cout << "Final lectura graf";
+
     VI S(0);
 
+    int mida_S = 0;
     if (model == "IC") {
+        if (test_mode) cout << "Model IC. ";
         if (alg == "greedy") {
+            if (test_mode) cout << "Executant algorisme: " << alg << endl;
             //greedyIC(G, S, intConf, c);
+        }
+        else if (alg == "localsearch") {
+            if (test_mode) cout << "Executant algorisme: " << alg << endl;
+            //localSearchIC;
+        }
+        else if(alg == "metaheuristic") {
+            if (test_mode) cout << "Executant algorisme: " << alg << endl;
+            //metaheuristicaIC
+        }
+        
+    }
+    else if (model == "LT") {
+        if (test_mode) cout << "Model LT. ";
+
+        //Precalculat dels llindars de cada vertex
+        vector<int> resistencia(n); 
+	    for (int i=0; i<n; ++i) resistencia[i] = ceil(c*G[i].size());
+        if (test_mode) cout << "Llindars precalculats correctament";
+
+        if (alg == "greedy") {
+            mida_S = greedyLTgrau(G, resistencia, S) << endl;
         }
         else if (alg == "localsearch") {
 
         }
         else if(alg == "metaheuristic") {}
     }
-    else if (model == "LT") {
-        vector<int> resistencia(n); 
-	    for (int i=0; i<n; ++i) resistencia[i] = ceil(c*G[i].size());
 
-        if (alg == "greedy") {
-            cout <<"Mida S: " <<greedyLTgrau(G, resistencia, S) << endl;
+    if (mida_S == S.size()) {
+        cout << "Mida_S: " << mida_S << endl;
+        if (show_S) {
             cout << "S = [";
             for (auto elem : S) cout << elem << '|';
             cout <<']'<<endl;
         }
-        else if (alg == "localsearch") {
-
-        }
-        else if(alg == "metaheuristic") {}
     }
-
+    else cout << "ERROR: Retorn de l'algorisme i mida S no concorden"
+}
 
     //CODIS QUE CRIDA
     /*
@@ -112,4 +127,3 @@ int main(int argc, char* argv[]) {
         %Retornaria S
         %Tamany S
     */
-}
