@@ -10,6 +10,8 @@ bool aprox_esp(const vector<VI>& G,const vector<int>& nousS,vector<vector<bool>>
     int necesaris= interval*n;
     int fallada = n-necesaris;
 
+    cout<<n<<" "<<necesaris<<" "<<fallada<<endl;
+
     int contador=0;
 
     while(ii<n){

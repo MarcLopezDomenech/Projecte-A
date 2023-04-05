@@ -9,7 +9,7 @@
 #include "greedyLTgrau.cpp"
 
 #define test_mode true
-#define show_S false
+#define show_S true
 
 
 using namespace std;
