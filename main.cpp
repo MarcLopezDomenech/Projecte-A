@@ -86,12 +86,14 @@ int main(int argc, char* argv[]) {
         }
         
     }
+
     else if (model == "LT") {
         if (test_mode) cout << "Model LT. ";
 
         //Precalculat dels llindars de cada vertex
         vector<int> resistencia(n); 
 	    for (int i=0; i<n; ++i) resistencia[i] = ceil(c*G[i].size());
+
         if (test_mode) cout << "(Llindars precalculats correctament)" << endl;
 
         if (alg == "greedy") {
@@ -105,6 +107,14 @@ int main(int argc, char* argv[]) {
         else if(alg == "metaheuristic") {
             if (test_mode) cout << "Executant algorisme: " << alg << endl;
             //metaheuristicaIC
+        }
+
+        //Comprovacio de S, és efectivmanet una soolució (amb el test_mode)
+        if (test_mode) {
+            cout << "Comprovem que la S obtinguda és solucio (executant la difusio amb aquest S fix): ";
+            vector<bool> A;
+            if (difusioLT(G, resistencia, S, A) == G.size()) cout << "ES SOLUCIO" << endl;
+            else cout << "NO ES SOLUCIO" <<endl;
         }
     }
 
