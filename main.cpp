@@ -2,6 +2,8 @@
 #include <vector>
 #include <queue>
 #include <math.h>
+#include <map>
+
 #include "readGraph.cpp"
 #include "greedyIC.cpp"
 #include "greedyLTgrau.cpp"
@@ -72,7 +74,7 @@ int main(int argc, char* argv[]) {
         if (test_mode) cout << "Model IC. " << endl;
         if (alg == "greedy") {
             if (test_mode) cout << "Executant algorisme: " << alg << endl;
-            //greedyIC(G, S, intConf, c);
+            mida_S = greedyIC(G, S, intConf, c);
         }
         else if (alg == "localsearch") {
             if (test_mode) cout << "Executant algorisme: " << alg << endl;
