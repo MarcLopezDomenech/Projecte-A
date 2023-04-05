@@ -29,6 +29,12 @@ int main(int argc, char* argv[]) {
         model = argv[1];
         alg = argv[2];
         c = stod(argv[3]);
+
+        if (alg != "greedy" or alg != "localsearch" or alg != "metaheuristic") {
+            cout << "Algorisme no reconegut" << endl;
+            return -1;
+        }
+
         if (model == "IC") {
             intConf = stod(argv[4]);
             if (test_mode) {
@@ -57,8 +63,8 @@ int main(int argc, char* argv[]) {
     if (test_mode) cout << "Final lectura graf";
 
     VI S(0);
-
     int mida_S = 0;
+
     if (model == "IC") {
         if (test_mode) cout << "Model IC. ";
         if (alg == "greedy") {
@@ -81,17 +87,23 @@ int main(int argc, char* argv[]) {
         //Precalculat dels llindars de cada vertex
         vector<int> resistencia(n); 
 	    for (int i=0; i<n; ++i) resistencia[i] = ceil(c*G[i].size());
-        if (test_mode) cout << "Llindars precalculats correctament";
+        if (test_mode) cout << "(Llindars precalculats correctament)" << endl;
 
         if (alg == "greedy") {
+            if (test_mode) cout << "Executant algorisme: " << alg << endl;
             mida_S = greedyLTgrau(G, resistencia, S) << endl;
         }
         else if (alg == "localsearch") {
-
+            if (test_mode) cout << "Executant algorisme: " << alg << endl;
+            //localsearchLT
         }
-        else if(alg == "metaheuristic") {}
+        else if(alg == "metaheuristic") {
+            if (test_mode) cout << "Executant algorisme: " << alg << endl;
+            //metaheuristicaIC
+        }
     }
 
+    //SORTIDA
     if (mida_S == S.size()) {
         cout << "Mida_S: " << mida_S << endl;
         if (show_S) {
@@ -100,7 +112,7 @@ int main(int argc, char* argv[]) {
             cout <<']'<<endl;
         }
     }
-    else cout << "ERROR: Retorn de l'algorisme i mida S no concorden"
+    else cout << "ERROR: Retorn de l'algorisme i mida S no concorden" << endl;
 }
 
     //CODIS QUE CRIDA
