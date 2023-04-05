@@ -3,7 +3,7 @@ CC = g++
 
 all: main
 
-main: main.cpp
+main: main.cpp greedyIC.cpp
 	$(CC) $(CFLAGS) $< -o $@ 
 
 clean:

@@ -3,23 +3,24 @@
 using VI = vector<int>;
 using namespace std;
 
-#define N_JOCS 100
+#define N_JOCS 100000
 
 int greedyIC(const vector<VI>& G, vector<int>& S,const double interval, const double probabilitat) {
     int nodes=G.size();
+
     vector<vector<bool>> J(N_JOCS,vector<bool>(nodes,false));
 
-    vector<int> grau(nodes,0);
-    map<int,int> grau_nodes;
-    for (int i=0; i<nodes; ++i){
-        grau[i] = G[i].size();
-        grau_nodes.insert(pair<int,int>(grau[i],i));
-    }
+    priority_queue<pair<int, int>> grau_nodes;
 
+    for (int i=0; i<nodes; ++i){
+        int grau = G[i].size();
+        grau_nodes.push(pair<int,int>(grau,i));
+    }
     while(not aprox_esp(G,S,J,interval,probabilitat)){
-        map<int,int>::iterator it=grau_nodes.begin();
-        S.push_back(it->second);
-        grau_nodes.erase(it);
+        pair<int,int> p=grau_nodes.top();
+        grau_nodes.pop();
+
+        S.push_back(p.second);
     }
     return S.size();
 }

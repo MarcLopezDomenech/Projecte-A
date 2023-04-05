@@ -24,6 +24,7 @@ bool aprox_esp(const vector<VI>& G,const vector<int>& nousS,vector<vector<bool>>
         if((ii-contador)>fallada){
             return false;
         }
+        ++ii;
     }
     return false;
     
