@@ -6,18 +6,20 @@
 #include "greedyIC.cpp"
 #include "greedyLTgrau.cpp"
 
-#define test_mode = false;
-#define show_S = false;
+#define test_mode true
+#define show_S false
+
 
 using namespace std;
 using VI = vector<int>;
 
-void usage1() {
+void Usage() {
     cout << "Usage: ./main model algorisme c (<Int. Conf.>)" << endl;
     cout << "   model: IC / LT" << endl;
-    cout << "       (Int. Conf.): Si el model es IC, escollir interval confiança entre 0 i 1, sino no es tindra en compte" << endl;
-    cout << "   algorisme: greedy / localsearch / metaheuristic" << endl;
-    cout << "   c (probabilitat si IC, llindar si LT): 0 <= c <= 1"<< endl;
+    cout << "   algorisme: greedy | localsearch | metaheuristic (no MAYUS)" << endl;
+    cout << "   c (probabilitat si IC, resistencia si LT): 0 <= c <= 1  (p.ex 0.85)"<< endl;
+    cout << "       (Int. Conf.): Si el model es IC, llavors  0 <= Int.Conf. <= 1  (p.ex 0.5)" << endl;
+    cout << "                     Sino no es tindra en compte" << endl;
 }
 
 int main(int argc, char* argv[]) {
@@ -30,8 +32,9 @@ int main(int argc, char* argv[]) {
         alg = argv[2];
         c = stod(argv[3]);
 
-        if (alg != "greedy" or alg != "localsearch" or alg != "metaheuristic") {
+        if (alg != "greedy" and alg != "localsearch" and alg != "metaheuristic") {
             cout << "Algorisme no reconegut" << endl;
+            Usage();
             return -1;
         }
 
@@ -50,7 +53,7 @@ int main(int argc, char* argv[]) {
         }
     }
     else {
-        usage1();
+        Usage();
         return -1;
     }
 
@@ -58,15 +61,15 @@ int main(int argc, char* argv[]) {
     n = m = 0;
     vector<VI> G;
 
-    if (test_mode) cout << "Inici lectura graf...";
+    if (test_mode) cout << "Inici lectura graf..." << endl;
     readGraphDIMACS(n, m, G);
-    if (test_mode) cout << "Final lectura graf";
+    if (test_mode) cout << "Final lectura graf" << endl;
 
     VI S(0);
     int mida_S = 0;
 
     if (model == "IC") {
-        if (test_mode) cout << "Model IC. ";
+        if (test_mode) cout << "Model IC. " << endl;
         if (alg == "greedy") {
             if (test_mode) cout << "Executant algorisme: " << alg << endl;
             //greedyIC(G, S, intConf, c);
@@ -91,7 +94,7 @@ int main(int argc, char* argv[]) {
 
         if (alg == "greedy") {
             if (test_mode) cout << "Executant algorisme: " << alg << endl;
-            mida_S = greedyLTgrau(G, resistencia, S) << endl;
+            mida_S = greedyLTgrau(G, resistencia, S);
         }
         else if (alg == "localsearch") {
             if (test_mode) cout << "Executant algorisme: " << alg << endl;
