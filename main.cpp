@@ -109,7 +109,7 @@ int main(int argc, char* argv[]) {
             //metaheuristicaIC
         }
 
-        //Comprovacio de S, és efectivmanet una soolució (amb el test_mode)
+        //Comprovacio de que S, és efectivament una solució (amb el test_mode)
         if (test_mode) {
             cout << "Comprovem que la S obtinguda és solucio (executant la difusio amb aquest S fix): ";
             vector<bool> A;
