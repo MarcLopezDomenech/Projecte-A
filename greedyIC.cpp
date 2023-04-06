@@ -16,6 +16,7 @@ int greedyIC(const vector<VI>& G, vector<int>& S,const double interval, const do
         int grau = G[i].size();
         grau_nodes.push(pair<int,int>(grau,i));
     }
+    /*
     int cond =  interval*nodes;
     int sumat=0;
     while(sumat<=cond){
@@ -33,13 +34,26 @@ int greedyIC(const vector<VI>& G, vector<int>& S,const double interval, const do
         sumat=sumat/N_JOCS;
         cout<<sumat<<"respercte el total"<<cond<<endl;
     }
-    /*
-    while(not aprox_esp(G,S,J,interval,probabilitat, S_Activats)){
+    */
+    int it=(nodes/100)+1;
+
+    bool cond=true;
+    int nombre=1;
+    //not aprox_esp(G,S,J,interval,probabilitat, S_Activats)
+    while(cond){
         pair<int,int> p=grau_nodes.top();
         grau_nodes.pop();
 
         S.push_back(p.second);
+
+        double perc=aprox_esp(G,S,J,interval,probabilitat, S_Activats);
+        if(perc>=interval){
+            cond=false;
+        }
+        if(nombre%it==0){
+            cout<<"Amb un conjunt de "<<S.size()<<" nodes, l'interval es: "<<perc<<endl;
+        }
     }
-    */
+    
     return S.size();
 }
