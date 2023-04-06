@@ -1,9 +1,11 @@
 CFLAGS = -std=c++2a 
 CC = g++
 
+SRC = main.cpp readGraph.cpp greedyIC.cpp aprox_esper.cpp difusioIC.cpp difusioLT.cpp greedyLTgrau.cpp greedyLTexhaustiu.cpp localSearchLT.cpp 
+
 all: main
 
-main: main.cpp greedyIC.cpp
+main: $(SRC)
 	$(CC) $(CFLAGS) $< -o $@ 
 
 clean:

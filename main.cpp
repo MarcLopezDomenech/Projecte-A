@@ -7,9 +7,10 @@
 #include "readGraph.cpp"
 #include "greedyIC.cpp"
 #include "greedyLTgrau.cpp"
+#include "localSearchLT.cpp"
 
 #define test_mode true
-#define show_S true
+#define show_S false
 
 
 using namespace std;
@@ -102,7 +103,8 @@ int main(int argc, char* argv[]) {
         }
         else if (alg == "localsearch") {
             if (test_mode) cout << "Executant algorisme: " << alg << endl;
-            //localsearchLT
+            S = localSearchLT(G, resistencia);
+            mida_S = S.size();
         }
         else if(alg == "metaheuristic") {
             if (test_mode) cout << "Executant algorisme: " << alg << endl;
