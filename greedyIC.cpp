@@ -3,7 +3,7 @@
 using VI = vector<int>;
 using namespace std;
 
-#define N_JOCS 100000
+#define N_JOCS 1000
 
 int greedyIC(const vector<VI>& G, vector<int>& S,const double interval, const double probabilitat) {
     int nodes=G.size();
@@ -17,8 +17,10 @@ int greedyIC(const vector<VI>& G, vector<int>& S,const double interval, const do
         grau_nodes.push(pair<int,int>(grau,i));
     }
     /*
+    int it=(nodes/100)+1;
     int cond =  interval*nodes;
     int sumat=0;
+    int nombre=1;
     while(sumat<=cond){
         sumat=0;
 
@@ -27,18 +29,21 @@ int greedyIC(const vector<VI>& G, vector<int>& S,const double interval, const do
         S.push_back(p.second);
 
         for(int ii=0;ii<N_JOCS;++ii){
-            int nodes=difusioICeficient(G,S,probabilitat,S_Activats[ii],J[ii]);
+            int nodes=difusioICeficient(G,S,probabilitat,S_Activats[ii],J[ii],ii);
             S_Activats[ii]=nodes;
             sumat=sumat+nodes;
         }
         sumat=sumat/N_JOCS;
-        cout<<sumat<<"respercte el total"<<cond<<endl;
+        if(nombre%it==0){
+            cout<<sumat<<" respercte el total "<<cond<<endl;
+        }
+        ++nombre;
     }
     */
+    
     int it=(nodes/100)+1;
-
     bool cond=true;
-    int nombre=1;
+    int nombre=0;
     //not aprox_esp(G,S,J,interval,probabilitat, S_Activats)
     while(cond){
         pair<int,int> p=grau_nodes.top();
@@ -53,7 +58,9 @@ int greedyIC(const vector<VI>& G, vector<int>& S,const double interval, const do
         if(nombre%it==0){
             cout<<"Amb un conjunt de "<<S.size()<<" nodes, l'interval es: "<<perc<<endl;
         }
+        ++nombre;
     }
+    
     
     return S.size();
 }

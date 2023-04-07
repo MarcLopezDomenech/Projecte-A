@@ -17,7 +17,7 @@ double aprox_esp(const vector<VI>& G,const vector<int>& nousS,vector<vector<bool
     int contador=0;
 
     while(ii<n){
-        int nodes=difusioICeficient(G,nousS,probabilitat,S_Activats[ii],J[ii]);
+        int nodes=difusioICeficient(G,nousS,probabilitat,S_Activats[ii],J[ii],ii);
         S_Activats[ii]=nodes;
 
         if(nodes==nodes_tot){

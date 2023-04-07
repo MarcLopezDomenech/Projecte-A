@@ -6,9 +6,9 @@ using namespace std;
 
 using VI = vector<int>;
 
-int difusioICeficient(const vector<VI>& G, const vector<int>& S, double p, int n_act_fix, vector<bool>& A){ //Presuposa G (graf), S (activats afegits) i p (probabilitat) amb els valors corresponents, n_act_fix te quants activats fixes hi ha, A te qui son els activats fixes. Retorna el size del activats totals finals, i actualitza A i act_reb.
-    //cout<<time(NULL)<<endl;
-    srand(time(NULL)); p = 100*p;
+int difusioICeficient(const vector<VI>& G, const vector<int>& S, double p, int n_act_fix, vector<bool>& A, int ii){ //Presuposa G (graf), S (activats afegits) i p (probabilitat) amb els valors corresponents, n_act_fix te quants activats fixes hi ha, A te qui son els activats fixes. Retorna el size del activats totals finals, i actualitza A i act_reb.
+    //cout<<time(NULL)*ii<<endl;
+    srand((time(NULL)*ii)%1000000); p = 100*p;
     
     int n = G.size(); 
     
@@ -46,6 +46,6 @@ int difusioIC(const vector<VI>& G, const vector<int>& S, double p, vector<bool>&
     
     A = vector<bool>(n, false);
     
-    return difusioICeficient(G, S, p, 0, A);
+    return difusioICeficient(G, S, p, 0, A, 1);
 }
 
