@@ -8,6 +8,7 @@
 #include "greedyIC.cpp"
 #include "greedyLTgrau.cpp"
 #include "localSearchLT.cpp"
+#include "localSearchIC.cpp"
 
 #define test_mode true
 #define show_S false
@@ -79,7 +80,7 @@ int main(int argc, char* argv[]) {
         }
         else if (alg == "localsearch") {
             if (test_mode) cout << "Executant algorisme: " << alg << endl;
-            //localSearchIC;
+            mida_S = localSearchIC(G, S, intConf, c);
         }
         else if(alg == "metaheuristic") {
             if (test_mode) cout << "Executant algorisme: " << alg << endl;
