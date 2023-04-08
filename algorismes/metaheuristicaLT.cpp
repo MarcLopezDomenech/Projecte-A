@@ -1,5 +1,4 @@
 #include <iostream>
-//#include "difusioLT.cpp"
 #include <time.h>
 #include <vector>
 #include <stdlib.h>
@@ -11,7 +10,7 @@ using namespace std;
 
 //Aquests dos valors es poden modificar per provar.
 //Les probabilitats com la de mutacio també.
-#define Mida_Populacio 50
+#define Mida_Populacio 40
 #define Iteracions_Acaba 10 
 
 vector<vector<int>> G;
@@ -31,6 +30,7 @@ class Indv
 	Indv(vector<float> a);
 	int calcular_fitness();
 	Indv crossover(Indv i2, double p_elite);
+	VI decoder();
 };
 
 Indv::Indv() {
@@ -64,12 +64,12 @@ int Indv::calcular_fitness() {
 	int fitness = 0;
 	int n = G.size();
 
-	vector<int> S;
+	vector<int> S(0);
 	vector<bool> A(n,false);
 	vector<int> act_reb(G.size(), 0);
 	int n_act_fix = 0;
-	vector<float> aux(n);
 
+	vector<float> aux(n);
 	float max = -1;
 	int i_max = 0;
 	for (int i = 0; i < n; ++i) {
@@ -98,9 +98,38 @@ int Indv::calcular_fitness() {
 	return S.size();
 }
 
+VI Indv::decoder() {
+	int n = G.size();
+
+	vector<int> S(0);
+	vector<bool> A(n,false);
+	vector<int> act_reb(G.size(), 0);
+	int n_act_fix = 0;
+
+	vector<float> aux(n);
+	float max = -1;
+	int i_max = 0;
+	for (int i = 0; i < n; ++i) {
+		aux[i] = grau[i]*v[i];
+
+	}
+	
+	while (n_act_fix < n) {
+		max = -1;
+		for(int i = 0; i <n; ++i) {
+			if (not A[i] and aux[i] > max) {
+				max = aux[i];
+				i_max = i;
+			}
+		}
+		S.push_back(i_max);
+		n_act_fix = difusioLTeficient(G, R, S, n_act_fix, act_reb,A);
+	}
+	return S;
+}
 
 
-void metaheuristicaLT(const vector<VI>& graf, const vector<int>& resistencia) {
+int metaheuristicaLT(const vector<VI>& graf, const vector<int>& resistencia, vector<int>& S) {
 	cout << "Inici" << endl;
 	srand(time(NULL));
 
@@ -135,7 +164,12 @@ void metaheuristicaLT(const vector<VI>& graf, const vector<int>& resistencia) {
 	}
 
 	cout << "ini3" << endl;
-	while (comptador < Iteracions_Acaba) {
+	
+	time_t start, actual, elapsed;
+
+	time(&start);
+
+	while (comptador < Iteracions_Acaba and elapsed < 500) {
 		cout << "Generacio " << gener << ':';
 		sort(populacio.begin(),populacio.end());
 
@@ -180,40 +214,10 @@ void metaheuristicaLT(const vector<VI>& graf, const vector<int>& resistencia) {
 		cout << " fitness " << populacio[0].fitness << endl;
 		++gener;
 		
+		time(&actual);
+		elapsed = actual - start;
+		//cout << "time "<<elapsed << endl;
 	}	
+	S = populacio[0].decoder();
+	return S.size();
 }
-
-/* void readGraphDIMACS(int& n, int&m, vector<VI>& Gr){
-    char p; string format;
-    cin >> p >> format >> n >> m;
-    Gr.resize(n, vector<int>(0));
-    for (int i = 0; i < m; ++i){
-        char e;
-        int x, y;
-        cin >> e >> x >> y;
-        --x; --y;
-        Gr[x].push_back(y); Gr[y].push_back(x);
-    }
-} */
-
-/* int main() {
-	
-	    int n, m;
-    n = m = 0;
-    vector<VI> Gr;
-    readGraphDIMACS(n, m, Gr);
-		double c;
-    c = 0.5;
-	
-	vector<int> resistencia(n); 
-	for (int i=0; i<n; ++i) {
-		resistencia[i] = ceil(c*Gr[i].size());
-		
-	}
-	
-	
-	metaheuristicaLT(Gr,resistencia);
-}
- */
-
-

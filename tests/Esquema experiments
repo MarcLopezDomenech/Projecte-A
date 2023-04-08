@@ -7,7 +7,7 @@ Exp:
     Idem anterior, pero en model LT en funcio de r
 
 Exp:
-    Veure com afecta la S inicial del localsearch (y la methaueristica, si es pot...)
+    Veure com afecta la S inicial del localsearch (y la metaheuristica, si es pot...)
 
 Exp:
     parametres metaheuristica
@@ -17,5 +17,3 @@ Exp:
 
 Exp:
     Estudi IC amb P i IntConf fixats amb tots els algorismes i comparar amb els BRKGA de la Maria
-
-

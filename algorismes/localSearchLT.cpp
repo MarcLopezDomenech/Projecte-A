@@ -4,8 +4,8 @@ using VI = vector<int>;
 
 
 
-VI localSearchLT(const vector<VI>& G, const vector<int>& R){ //Presuposa G (graf), R (resistencies).
-	VI S(0);
+int localSearchLT(const vector<VI>& G, const vector<int>& R, vector<int>& S){ //Presuposa G (graf), R (resistencies).
+
 	greedyLTgrau(G, R, S);
 	bool found = true;
 	int tot = G.size();
@@ -26,7 +26,7 @@ VI localSearchLT(const vector<VI>& G, const vector<int>& R){ //Presuposa G (graf
 			}
 		}
 	}
-	return S;
+	return S.size();
 }
 
 

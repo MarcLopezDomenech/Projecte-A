@@ -3,13 +3,14 @@
 #include <queue>
 #include <math.h>
 #include <map>
+#include <chrono>
 
-#include "readGraph.cpp"
-#include "greedyIC.cpp"
-#include "greedyLTgrau.cpp"
-#include "localSearchLT.cpp"
-#include "localSearchIC.cpp"
-#include "metaheuristicaLT.cpp"
+#include "algorismes/readGraph.cpp"
+#include "algorismes/greedyIC.cpp"
+#include "algorismes/greedyLTgrau.cpp"
+#include "algorismes/localSearchLT.cpp"
+#include "algorismes/localSearchIC.cpp"
+#include "algorismes/metaheuristicaLT.cpp"
 
 #define test_mode true
 #define show_S false
@@ -17,6 +18,9 @@
 
 using namespace std;
 using VI = vector<int>;
+using std::chrono::high_resolution_clock;
+using std::chrono::duration_cast;
+using std::chrono::milliseconds;
 
 void Usage() {
     cout << "Usage: ./main model algorisme c (<Int. Conf.>)" << endl;
@@ -73,19 +77,31 @@ int main(int argc, char* argv[]) {
     VI S(0);
     int mida_S = 0;
 
+    
+    std::chrono::high_resolution_clock::time_point start, end;
+    
     if (model == "IC") {
         if (test_mode) cout << "Model IC. " << endl;
         if (alg == "greedy") {
             if (test_mode) cout << "Executant algorisme: " << alg << endl;
+
+            start = high_resolution_clock::now();
             mida_S = greedyIC(G, S, intConf, c);
+            end = high_resolution_clock::now();
         }
         else if (alg == "localsearch") {
             if (test_mode) cout << "Executant algorisme: " << alg << endl;
+
+            start = high_resolution_clock::now();
             mida_S = localSearchIC(G, S, intConf, c);
+            end = high_resolution_clock::now();
         }
         else if(alg == "metaheuristic") {
             if (test_mode) cout << "Executant algorisme: " << alg << endl;
+
+            start = high_resolution_clock::now();
             //metaheuristicaIC
+            end = high_resolution_clock::now();
         }
         
     }
@@ -101,16 +117,24 @@ int main(int argc, char* argv[]) {
 
         if (alg == "greedy") {
             if (test_mode) cout << "Executant algorisme: " << alg << endl;
+
+            start = high_resolution_clock::now();
             mida_S = greedyLTgrau(G, resistencia, S);
+            end = high_resolution_clock::now();
         }
         else if (alg == "localsearch") {
             if (test_mode) cout << "Executant algorisme: " << alg << endl;
-            S = localSearchLT(G, resistencia);
-            mida_S = S.size();
+
+            start = high_resolution_clock::now();
+            mida_S = localSearchLT(G, resistencia, S);
+            end = high_resolution_clock::now();
         }
         else if(alg == "metaheuristic") {
             if (test_mode) cout << "Executant algorisme: " << alg << endl;
-            //metaheuristicaLT(G, resistencia);
+
+            start = high_resolution_clock::now();
+            mida_S = metaheuristicaLT(G, resistencia, S);
+            end = high_resolution_clock::now();
         }
 
         //Comprovacio de que S, és efectivament una solució (amb el test_mode)
@@ -121,10 +145,13 @@ int main(int argc, char* argv[]) {
             else cout << "NO ES SOLUCIO" <<endl;
         }
     }
+    
+    auto total_ms = duration_cast<milliseconds>(end - start);
 
     //SORTIDA
     if (mida_S == S.size()) {
-        cout << "Mida_S: " << mida_S << endl;
+        cout << "Mida_S: " << mida_S << " |Temps(ms): "<< total_ms.count() <<endl;
+        
         if (show_S) {
             cout << "S = [";
             for (auto elem : S) cout << elem << '|';
