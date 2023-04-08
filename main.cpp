@@ -9,6 +9,7 @@
 #include "greedyLTgrau.cpp"
 #include "localSearchLT.cpp"
 #include "localSearchIC.cpp"
+#include "metaheuristica_brkgaLT.cpp"
 
 #define test_mode true
 #define show_S false
@@ -109,7 +110,7 @@ int main(int argc, char* argv[]) {
         }
         else if(alg == "metaheuristic") {
             if (test_mode) cout << "Executant algorisme: " << alg << endl;
-            //metaheuristicaIC
+            metaheuristicaLT(G, R);
         }
 
         //Comprovacio de que S, és efectivament una solució (amb el test_mode)
