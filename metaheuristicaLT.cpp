@@ -1,5 +1,5 @@
 #include <iostream>
-#include "NewdifusioLT.cpp"
+#include "difusioLT.cpp"
 #include <time.h>
 #include <vector>
 #include <stdlib.h>

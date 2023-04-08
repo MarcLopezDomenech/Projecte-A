@@ -1,5 +1,5 @@
 #include <iostream>
-#include "NewdifusioLT.cpp"
+#include "difusioLT.cpp"
 #include <time.h>
 #include <vector>
 #include <stdlib.h>
@@ -178,6 +178,9 @@ int main() {
 	
 	
 	VI S = metaheuristicaLT(Gr,resistencia);
+	cout << S.size() << endl;
+	for (auto elem: S) cout << elem <<' ';
+	cout << endl;
 }
 
 
