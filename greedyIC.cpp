@@ -3,7 +3,7 @@
 using VI = vector<int>;
 using namespace std;
 
-#define N_JOCS 100
+#define N_JOCS 10000
 
 int greedyIC(const vector<VI>& G, vector<int>& S,const double interval, const double probabilitat) {
     int nodes=G.size();
@@ -55,12 +55,13 @@ int greedyIC(const vector<VI>& G, vector<int>& S,const double interval, const do
         if(perc>=interval){
             cond=false;
         }
+        /*
         if(nombre%it==0){
             cout<<"Amb un conjunt de "<<S.size()<<" nodes, l'interval es: "<<perc<<endl;
         }
         ++nombre;
+        */
+        cout<<probabilitat<<" "<<S.size()<<" "<<perc<<endl;
     }
-    
-    
     return S.size();
 }
