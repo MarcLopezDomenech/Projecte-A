@@ -1,7 +1,7 @@
 using namespace std;
 using VI = vector<int>;
 
-#define N_JOCS 10000
+#define N_JOCS 100
 
 int localSearchIC(const vector<VI>& G, vector<int>& S,const double interval, const double probabilitat){
     greedyIC(G,S,interval,probabilitat);
@@ -10,9 +10,13 @@ int localSearchIC(const vector<VI>& G, vector<int>& S,const double interval, con
 	int tot = G.size();
 	int imin = 0;
 	vector<bool> A(tot,false);
-	
+
+	int it=(tot/100)+1;
+	int nombre=0;
+
 	while (found) {
 		int n = S.size();
+
 		found  = false;
 		for (int i=imin; not found and i<n; ++i) { 
 			VI aux;
@@ -29,7 +33,10 @@ int localSearchIC(const vector<VI>& G, vector<int>& S,const double interval, con
 				S.erase(S.begin()+i);
 				imin = i;
 
-                cout<<"Amb un conjunt de "<<S.size()<<" nodes, l'interval es: "<<perc<<endl;
+				if(nombre%it==0){
+					cout<<"Amb un conjunt de "<<S.size()<<" nodes, l'interval es: "<<perc<<endl;
+				}
+				++nombre;
 			}
 		}
 	}
