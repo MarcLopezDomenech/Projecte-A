@@ -130,7 +130,7 @@ VI Indv::decoder() {
 
 
 int metaheuristicaLT(const vector<VI>& graf, const vector<int>& resistencia, vector<int>& S) {
-	cout << "Inici" << endl;
+	//cout << "Inici" << endl;
 	srand(time(NULL));
 
 	G = graf;
@@ -142,15 +142,14 @@ int metaheuristicaLT(const vector<VI>& graf, const vector<int>& resistencia, vec
 	int min = G.size() + 1;
 	int comptador = 0;
 
-	/* default_random_engine generator;
-	uniform_real_distribution<double> distribution(0.0,1.0); */
-	cout << "ini 1.5" << endl;
+	//cout << "ini 1.5" << endl;
 	grau = vector<int> (G.size());
 	for (int i = 0; i < G.size(); ++i) {
 		grau[i] = G[i].size();
 	}
 
-	cout << "ini2" << endl;
+	//cout << "ini2" << endl;
+
 	/* vector<float> first (G.size(), 0.5);
 	populacio.push_back(Indv(first)); */
 	for (int i=0; i < Mida_Populacio; ++i) { //Populacio Inicial.
@@ -163,7 +162,7 @@ int metaheuristicaLT(const vector<VI>& graf, const vector<int>& resistencia, vec
 		populacio.push_back(Indv(aux));
 	}
 
-	cout << "ini3" << endl;
+	//cout << "ini3" << endl;
 	
 	time_t start, actual, elapsed;
 
