@@ -1,7 +1,7 @@
 CFLAGS = -std=c++2a 
 CC = g++
 
-SRC = main.cpp readGraph.cpp greedyIC.cpp aprox_esper.cpp difusioIC.cpp difusioLT.cpp greedyLTgrau.cpp greedyLTexhaustiu.cpp localSearchLT.cpp localSearchIC.cpp metaheuristicaLT.cpp
+SRC = main.cpp algorismes/readGraph.cpp algorismes/greedyIC.cpp algorismes/aprox_esper.cpp algorismes/difusioIC.cpp algorismes/difusioLT.cpp algorismes/greedyLTgrau.cpp algorismes/localSearchLT.cpp algorismes/localSearchIC.cpp algorismes/metaheuristicaLT.cpp
 
 all: main
 
