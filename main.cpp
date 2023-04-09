@@ -86,13 +86,16 @@ int main(int argc, char* argv[]) {
         if (alg == "greedy") {
             if (test_mode) cout << "Executant algorisme: " << alg << endl;
 
-            cout<<"Probabilidad"<<","<<"Medida del conjunto solución"<<","<<"Intervalo de confianza"<<endl;
+            /* cout<<"Probabilidad"<<","<<"Medida del conjunto solución"<<","<<"Intervalo de confianza"<<endl;
             for(c=0.1;c<1;c+=0.05){
                 for(intConf=0.1;intConf<1;intConf+=0.05){
                     VI S(0);
                     mida_S = greedyIC(G, S, intConf, c);
                 }
-            }
+            } */
+            start = high_resolution_clock::now();
+            mida_S = greedyIC(G, S, intConf, c);
+            end = high_resolution_clock::now();
         }
         else if (alg == "localsearch") {
             if (test_mode) cout << "Executant algorisme: " << alg << endl;
