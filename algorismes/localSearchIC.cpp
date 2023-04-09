@@ -1,7 +1,6 @@
 using namespace std;
 using VI = vector<int>;
 
-#define N_JOCS 10000
 
 int localSearchIC(const vector<VI>& G, vector<int>& S,const double interval, const double probabilitat){
     greedyIC(G,S,interval,probabilitat);

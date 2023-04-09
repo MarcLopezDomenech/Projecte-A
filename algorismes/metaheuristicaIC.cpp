@@ -13,121 +13,16 @@ using namespace std;
 #define Mida_Populacio 40
 #define Iteracions_Acaba 10 
 
-vector<vector<int>> G;
-
-vector<int> R;
-vector<int> grau;
-string model_meta;
-double probabilitat;
-double interval;
-
 using VI = vector<int>;
 
-class Indv
-{
-	public:
-	vector<float> v;
-	int fitness;
-
-	Indv();
-	Indv(vector<float> a);
-	int calcular_fitness();
-	Indv crossover(Indv i2, double p_elite);
-	void decoder(vector<int>& S);
-};
-
-Indv::Indv() {
-	this-> v = vector<float> (G.size(),0);
-	fitness = G.size()*2 + 1;
-}
-
-Indv::Indv(vector<float> a) {
-	this-> v = a;
-	fitness = calcular_fitness();
-}
-
-Indv Indv::crossover(Indv i2, double p_elite) {
-	
-	int n = v.size();
-	vector<float> fill(n);
-	for (int i=0; i<n; ++i) {
-		double p = rand()%101;
-		if (p < p_elite*100) fill[i] = v[i];
-		else fill[i] = i2.v[i];
-	}
-	return Indv(fill);
-}
-
-
-bool operator<(const Indv& i1, const Indv& i2) {
-	return i1.fitness < i2.fitness;
-}
-
-int Indv::calcular_fitness() {
-	int fitness = 0;
-	vector<int> S;
-	this->decoder(S);
-	return S.size();
-}
-
-void Indv::decoder(vector<int>& S) {
-	int n = G.size();
-	S = vector<int> (0);
-	vector<bool> A(n,false);
-	vector<int> act_reb(G.size(), 0);
-	int n_act_fix = 0;
-
-	vector<float> aux(n);
-	float max = -1;
-	int i_max = 0;
-	for (int i = 0; i < n; ++i) {
-		aux[i] = grau[i]*v[i];
-
-	}
-	
-	if (model_meta == "LT") {
-		while (n_act_fix < n) {
-			max = -1;
-			for(int i = 0; i <n; ++i) {
-				if (not A[i] and aux[i] > max) {
-					max = aux[i];
-					i_max = i;
-				}
-			}
-			S.push_back(i_max);
-			n_act_fix = difusioLTeficient(G, R, S, n_act_fix, act_reb,A);
-		}
-	}
-	else if (model_meta == "IC") {
-		bool cond = true;
-		while (cond) {
-			max = -1;
-			for(int i = 0; i <n; ++i) {
-				if (not A[i] and aux[i] > max) {
-					max = aux[i];
-					i_max = i;
-				}
-			}
-			S.push_back(i_max);
-			A[i_max] = true;
-			vector<vector<bool>> J(N_JOCS,vector<bool>(G.size(),false));
-			vector<int> S_Activats(N_JOCS,0);
-			double perc=aprox_esp(G, S, J, interval, probabilitat, S_Activats);
-			if(perc>=interval){
-				cond=false;
-			}
-		}
-	}
-}
-
-
-int metaheuristicaLT(const vector<VI>& graf, const vector<int>& resistencia, vector<int>& S) {
+int metaheuristicaIC(const vector<VI>& graf, vector<int>& S, const double intconf, const double p) {
 	//cout << "Inici" << endl;
 	srand(time(NULL));
-
 	G = graf;
-	R = resistencia;
-	model_meta = "LT";
+	probabilitat = p;
+	interval = intconf;
+	model_meta = "IC";
+
 	int gener = 0;
 	
 	vector<Indv> populacio(Mida_Populacio);

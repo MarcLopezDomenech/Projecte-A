@@ -11,6 +11,7 @@
 #include "algorismes/localSearchLT.cpp"
 #include "algorismes/localSearchIC.cpp"
 #include "algorismes/metaheuristicaLT.cpp"
+#include "algorismes/metaheuristicaIC.cpp"
 
 #define test_mode true
 #define show_S false
@@ -104,7 +105,7 @@ int main(int argc, char* argv[]) {
             if (test_mode) cout << "Executant algorisme: " << alg << endl;
 
             start = high_resolution_clock::now();
-            //metaheuristicaIC
+            mida_S = metaheuristicaIC(G, S, intConf, c);
             end = high_resolution_clock::now();
         }
         
