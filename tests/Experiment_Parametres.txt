@@ -1,0 +1,184 @@
+Prova 1: 0.12 0.13 0.6
+
+Jazz -> 24 , 364 ms
+Ego_Facebook -> 553, 153495 ms
+CA_HepTh -> 1350 , 521000
+
+
+Prova 2: 0.12 0.13 0.7
+
+Jazz -> 25, 309 ms
+Ego_Facebook -> 544, 233277 ms
+CA_HepTh -> 1369, 514759
+
+Prova 3: 0.12 0.13 0.8
+
+Jazz -> 23, 344
+Ego_Facebook -> 568, 126435 ms
+CA_HepTh -> 1357, 515420 ms
+
+Prova 4: 0.12 0.20 0.6
+
+Jazz -> 23, 433 ms
+Ego_Facebook -> 543, 186650
+CA_HepTh -> 1359, 524322 ms
+
+
+Prova 5: 0.12 0.20 0.7
+
+Jazz -> 22, 454 ms
+Ego_Facebook -> 550, 262809 ms
+CA_HepTh -> 1334, 524722 ms
+
+
+Prova 6: 0.12 0.20 0.8
+
+Jazz -> 23, 478 ms
+Ego_Facebook -> 570, 182433 ms
+CA_HepTh -> 1358, 515069 ms
+
+
+Prova 7: 0.12 0.27 0.6
+
+Jazz -> 24, 333 ms
+Ego_Facebook -> 571, 307905 ms
+CA_HepTh -> 1351, 520863 ms
+
+
+
+Prova 8: 0.12 0.27 0.7
+
+Jazz -> 26, 270 ms
+Ego_Facebook -> 558, 211010 ms
+CA_HepTh -> 1347, 517044
+
+
+Prova 9: 0.12 0.27 0.8
+
+Jazz -> 25, 302 ms
+Ego_Facebook -> 574, 127310 ms
+CA_HepTh -> 1362 520400 ms
+
+
+Prova 10: 0.18 0.13 0.6
+
+Jazz -> 23, 497 ms
+Ego_Facebook -> 524, 247410 ms
+CA_HepTh -> 1350, 520588 ms
+
+
+Prova 11: 0.18 0.13 0.7
+
+Jazz -> 25, 233 ms
+Ego_Facebook -> 533, 252611 ms
+CA_HepTh -> 1350, 520984 ms
+
+
+Prova 12: 0.18 0.13 0.8
+
+Jazz -> 23, 282 ms
+Ego_Facebook -> 541, 241887 ms
+CA_HepTh -> 1344, 518468
+
+
+Prova 13: 0.18 0.20 0.6
+
+Jazz -> 24, 399 ms
+Ego_Facebook -> 549, 237570 ms
+CA_HepTh -> 1360, 525719 ms
+
+
+Prova 14: 0.18 0.20 0.7
+
+Jazz -> 24, 438 ms
+Ego_Facebook -> 529, 324087
+CA_HepTh -> 1363, 524989
+
+
+Prova 15: 0.18 0.20 0.8
+
+Jazz -> 23, 466
+Ego_Facebook -> 532, 473369
+CA_HepTh -> 1359, 521048
+
+
+Prova 16: 0.18 0.27 0.6
+
+Jazz -> 24, 369 
+Ego_Facebook -> 545, 208932
+CA_HepTh -> 1367, 516728
+
+
+Prova 17: 0.18 0.27 0.7
+
+Jazz -> 21, 382
+Ego_Facebook -> 533, 343911
+CA_HepTh -> 1360, 526129
+
+
+Prova 18: 0.18 0.27 0.8
+
+Jazz -> 22, 216
+Ego_Facebook -> 526, 391962
+CA_HepTh -> 1359, 525104
+
+Prova 19: 0.24 0.13 0.6
+
+Jazz -> 21, 557
+Ego_Facebook -> 505, 310390
+CA_HepTh -> 1343, 523960
+
+
+Prova 20: 0.24 0.13 0.7
+
+Jazz -> 22, 395
+Ego_Facebook -> 534, 172818
+CA_HepTh -> 1339, 518029
+
+
+Prova 21: 0.24 0.13 0.8
+
+Jazz -> 24, 389
+Ego_Facebook -> 557, 183711
+CA_HepTh -> 1351, 518582
+
+Prova 22: 0.24 0.20 0.6
+
+Jazz -> 23, 473
+Ego_Facebook -> 531, 278817
+CA_HepTh -> 1370, 521445
+
+
+Prova 23: 0.24 0.20 0.7
+
+Jazz -> 20, 523
+Ego_Facebook -> 561, 169089
+CA_HepTh -> 1354, 515721
+
+
+Prova 24: 0.24 0.20 0.8
+
+Jazz -> 24, 263
+Ego_Facebook -> 536, 282699
+CA_HepTh -> 1361, 524540
+
+
+Prova 25: 0.24 0.27 0.6
+
+Jazz -> 24, 312
+Ego_Facebook -> 553, 176206
+CA_HepTh -> 1364, 522688
+
+
+Prova 26: 0.24 0.27 0.7
+
+Jazz -> 24, 390
+Ego_Facebook -> 558, 244000
+CA_HepTh -> 1366, 521667
+
+
+Prova 27: 0.24 0.27 0.8
+
+Jazz -> 24, 395
+Ego_Facebook -> 556, 184310
+CA_HepTh -> 1369, 519129
