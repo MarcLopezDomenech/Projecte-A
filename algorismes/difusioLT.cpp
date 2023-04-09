@@ -6,14 +6,18 @@ using namespace std;
 
 using VI = vector<int>;
 
-int difusioLTeficient(const vector<VI>& G, const vector<int>& R, const vector<int>& S, int n_act_fix, vector<int>& act_reb, vector<bool>& A){ //Presuposa G (graf), R (resistencies) i S (activats afegits) amb els valors corresponents, n_act_fix te quants activats fixes hi ha, act_reb te l'activacio rebuda ja calculada dels activats fixes, A te qui son els activats fixes. Retorna el size del activats totals finals, i actualitza A i act_reb.
+int difusioLTeficient2(const vector<VI>& G, const vector<int>& R, const vector<int>& S, int n_act_fix, vector<int>& act_reb, vector<bool>& A, vector<int>& nous_a){ //Presuposa G (graf), R (resistencies) i S (activats afegits) amb els valors corresponents, n_act_fix te quants activats fixes hi ha, act_reb te l'activacio rebuda ja calculada dels activats fixes, A te qui son els activats fixes. Retorna el size del activats totals finals, i actualitza A i act_reb.
     int n = G.size(); 
+    nous_a.resize(0);
     
     int c = n_act_fix;
     queue<int> I; 
     for (int node_afegit : S) { 
-        if (not A[node_afegit]) I.push(node_afegit); 
-        A[node_afegit] = true;
+        if (not A[node_afegit]){
+            A[node_afegit] = true;
+            I.push(node_afegit); 
+            nous_a.push_back(node_afegit);
+        }
     }
     
     int t = 0; 
@@ -31,6 +35,7 @@ int difusioLTeficient(const vector<VI>& G, const vector<int>& R, const vector<in
                     if (act_reb[vei_i] >= R[vei_i]) {
                         A[vei_i] = true;
                         newI.push(vei_i);
+                        nous_a.push_back(vei_i);
                     }
                 }
             }
@@ -39,6 +44,11 @@ int difusioLTeficient(const vector<VI>& G, const vector<int>& R, const vector<in
         ++t;
     }
    return c; 
+}
+
+int difusioLTeficient(const vector<VI>& G, const vector<int>& R, const vector<int>& S, int n_act_fix, vector<int>& act_reb, vector<bool>& A){ //Presuposa G (graf), R (resistencies) i S (activats afegits) amb els valors corresponents, n_act_fix te quants activats fixes hi ha, act_reb te l'activacio rebuda ja calculada dels activats fixes, A te qui son els activats fixes. Retorna el size del activats totals finals, i actualitza A i act_reb.
+    vector<int> nous_a;
+   return difusioLTeficient2(G, R, S, n_act_fix, act_reb, A, nous_a); 
 }
 
 int difusioLT(const vector<VI>& G, const vector<int>& R, const vector<int>& S, vector<bool>& A){

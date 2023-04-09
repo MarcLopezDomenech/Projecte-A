@@ -32,7 +32,7 @@ class Indv
 	Indv();
 	Indv(vector<float> a);
 	int calcular_fitness();
-	Indv crossover(Indv i2, double p_elite);
+	Indv crossover(const Indv& i2, double p_elite);
 	void decoder(vector<int>& S);
 };
 
@@ -46,7 +46,7 @@ Indv::Indv(vector<float> a) {
 	fitness = calcular_fitness();
 }
 
-Indv Indv::crossover(Indv i2, double p_elite) {
+Indv Indv::crossover(const Indv& i2, double p_elite) {
 	
 	int n = v.size();
 	vector<float> fill(n);
@@ -73,51 +73,57 @@ int Indv::calcular_fitness() {
 void Indv::decoder(vector<int>& S) {
 	int n = G.size();
 	S = vector<int> (0);
-	vector<bool> A(n,false);
-	vector<int> act_reb(G.size(), 0);
+    vector<bool> A(n, false);
+	vector<int> act_reb(n, 0);
 	int n_act_fix = 0;
-
-	vector<float> aux(n);
-	float max = -1;
-	int i_max = 0;
-	for (int i = 0; i < n; ++i) {
-		aux[i] = grau[i]*v[i];
-
-	}
 	
-	if (model_meta == "LT") {
+	if (model_meta == "LTbasic") {
+        priority_queue<pair<double, int>> grau_nodes;
+        for (int i=0; i<n; ++i){
+            double grau = G[i].size();
+            grau_nodes.push(pair<double,int>(grau*v[i],i));
+        }
+        
 		while (n_act_fix < n) {
-			max = -1;
-			for(int i = 0; i <n; ++i) {
-				if (not A[i] and aux[i] > max) {
-					max = aux[i];
-					i_max = i;
-				}
-			}
-			S.push_back(i_max);
-			n_act_fix = difusioLTeficient(G, R, S, n_act_fix, act_reb,A);
+            //cout << n_act_fix << endl;
+            
+            int imax = grau_nodes.top().second; grau_nodes.pop();
+            while (A[imax]) {imax = grau_nodes.top().second; grau_nodes.pop();}
+            
+			S.push_back(imax);
+            vector<int> newi(0); newi.push_back(imax);
+			n_act_fix = difusioLTeficient(G, R, newi, n_act_fix, act_reb,A);
 		}
 	}
+	else if (model_meta == "LTexperimental"){
+        greedyLTgrauWeighted(G, R, S, v);
+    }
+    else if (model_meta == "LTlocalsearch"){
+        localSearchLTWeighted(G, R, S, v);
+    }
 	else if (model_meta == "IC") {
+        vector<float> aux(n);
+        priority_queue<pair<double, int>> grau_nodes;
+
+        for (int i=0; i<n; ++i){
+            double grau = G[i].size();
+            grau_nodes.push(pair<double,int>(grau,i));
+        }
+        
 		bool cond = true;
+        vector<vector<bool>> J(N_JOCS,vector<bool>(G.size(),false));
+        vector<int> S_Activats(N_JOCS,0);
 		while (cond) {
-			max = -1;
-			for(int i = 0; i <n; ++i) {
-				if (not A[i] and aux[i] > max) {
-					max = aux[i];
-					i_max = i;
-				}
-			}
-			S.push_back(i_max);
-			A[i_max] = true;
-			vector<vector<bool>> J(N_JOCS,vector<bool>(G.size(),false));
-			vector<int> S_Activats(N_JOCS,0);
+			int imax = grau_nodes.top().second; grau_nodes.pop();
+            
+			S.push_back(imax);
 			double perc=aprox_esp(G, S, J, interval, probabilitat, S_Activats);
 			if(perc>=interval){
 				cond=false;
 			}
 		}
 	}
+	//cout << "Tamany S: " << S.size() << endl;
 }
 
 
@@ -127,7 +133,7 @@ int metaheuristicaLT(const vector<VI>& graf, const vector<int>& resistencia, vec
 
 	G = graf;
 	R = resistencia;
-	model_meta = "LT";
+	model_meta = "LTlocalsearch";
 	int gener = 0;
 	
 	vector<Indv> populacio(Mida_Populacio);
@@ -141,10 +147,9 @@ int metaheuristicaLT(const vector<VI>& graf, const vector<int>& resistencia, vec
 
 	//cout << "ini2" << endl;
 
-	/* vector<float> first (G.size(), 0.5);
+	 vector<float> first (G.size(), 0.5);
 	populacio[0] = Indv(first);
-	 */
-	for (int i=0; i < Mida_Populacio; ++i) { //Populacio Inicial.
+	for (int i=1; i < Mida_Populacio; ++i) { //Populacio Inicial.
 		vector<float> aux(G.size());
 		for (int j = 0; j < G.size(); ++j) {
 			double number = ((double) rand() / (RAND_MAX));
