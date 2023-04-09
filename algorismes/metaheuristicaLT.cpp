@@ -102,12 +102,11 @@ void Indv::decoder(vector<int>& S) {
         localSearchLTWeighted(G, R, S, v);
     }
 	else if (model_meta == "IC") {
-        vector<float> aux(n);
         priority_queue<pair<double, int>> grau_nodes;
 
         for (int i=0; i<n; ++i){
             double grau = G[i].size();
-            grau_nodes.push(pair<double,int>(grau,i));
+            grau_nodes.push(pair<double,int>(grau*v[i],i));
         }
         
 		bool cond = true;
