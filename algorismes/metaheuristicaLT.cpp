@@ -133,7 +133,7 @@ int metaheuristicaLT(const vector<VI>& graf, const vector<int>& resistencia, vec
 
 	G = graf;
 	R = resistencia;
-	model_meta = "LTlocalsearch";
+	model_meta = "LTexperimental";
 	int gener = 0;
 	
 	vector<Indv> populacio(Mida_Populacio);
@@ -147,7 +147,7 @@ int metaheuristicaLT(const vector<VI>& graf, const vector<int>& resistencia, vec
 
 	//cout << "ini2" << endl;
 
-	 vector<float> first (G.size(), 0.5);
+	vector<float> first (G.size(), 0.5);
 	populacio[0] = Indv(first);
 	for (int i=1; i < Mida_Populacio; ++i) { //Populacio Inicial.
 		vector<float> aux(G.size());
