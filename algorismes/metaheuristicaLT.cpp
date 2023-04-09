@@ -30,7 +30,7 @@ class Indv
 	Indv(vector<float> a);
 	int calcular_fitness();
 	Indv crossover(Indv i2, double p_elite);
-	VI decoder();
+	void decoder(vector<int>& S);
 };
 
 Indv::Indv() {
@@ -62,46 +62,14 @@ bool operator<(const Indv& i1, const Indv& i2) {
 
 int Indv::calcular_fitness() {
 	int fitness = 0;
-	int n = G.size();
-
-	vector<int> S(0);
-	vector<bool> A(n,false);
-	vector<int> act_reb(G.size(), 0);
-	int n_act_fix = 0;
-
-	vector<float> aux(n);
-	float max = -1;
-	int i_max = 0;
-	for (int i = 0; i < n; ++i) {
-		aux[i] = grau[i]*v[i];
-
-	}
-	
-	//cout << n_act_fix <<' ' << n << endl;
-	while (n_act_fix < n) {
-		max = -1;
-		for(int i = 0; i <n; ++i) {
-			if (not A[i] and aux[i] > max) {
-				max = aux[i];
-				i_max = i;
-			}
-		}
-		S.push_back(i_max);
-		n_act_fix = difusioLTeficient(G, R, S, n_act_fix, act_reb,A);
-		//cout <<i_max<< endl;
-		//cout << n_act_fix <<' ' << n << endl;
-		/* int suma = 0;
-		for (auto elem : A) if (elem) ++suma;
-		cout << "sum "<<suma << endl; */
-	}
-	//cout << S.size() << endl;
+	vector<int> S;
+	this->decoder(S);
 	return S.size();
 }
 
-VI Indv::decoder() {
+void Indv::decoder(vector<int>& S) {
 	int n = G.size();
-
-	vector<int> S(0);
+	S = vector<int> (0);
 	vector<bool> A(n,false);
 	vector<int> act_reb(G.size(), 0);
 	int n_act_fix = 0;
@@ -125,7 +93,6 @@ VI Indv::decoder() {
 		S.push_back(i_max);
 		n_act_fix = difusioLTeficient(G, R, S, n_act_fix, act_reb,A);
 	}
-	return S;
 }
 
 
@@ -141,7 +108,6 @@ int metaheuristicaLT(const vector<VI>& graf, const vector<int>& resistencia, vec
 	vector<Indv> populacio(Mida_Populacio);
 	int min = G.size() + 1;
 	int comptador = 0;
-
 	//cout << "ini 1.5" << endl;
 	grau = vector<int> (G.size());
 	for (int i = 0; i < G.size(); ++i) {
@@ -151,7 +117,8 @@ int metaheuristicaLT(const vector<VI>& graf, const vector<int>& resistencia, vec
 	//cout << "ini2" << endl;
 
 	/* vector<float> first (G.size(), 0.5);
-	populacio.push_back(Indv(first)); */
+	populacio[0] = Indv(first);
+	 */
 	for (int i=0; i < Mida_Populacio; ++i) { //Populacio Inicial.
 		vector<float> aux(G.size());
 		for (int j = 0; j < G.size(); ++j) {
@@ -159,14 +126,14 @@ int metaheuristicaLT(const vector<VI>& graf, const vector<int>& resistencia, vec
 			//cout << number << endl;
 			aux[j] = number;
 		}
-		populacio.push_back(Indv(aux));
+		populacio[i] = Indv(aux);
 	}
 
 	//cout << "ini3" << endl;
 	
 	time_t start, actual, elapsed;
-
 	time(&start);
+	elapsed = start-start; //inicialitzar elapsed
 
 	while (comptador < Iteracions_Acaba and elapsed < 500) {
 		cout << "Generacio " << gener << ':';
@@ -217,6 +184,6 @@ int metaheuristicaLT(const vector<VI>& graf, const vector<int>& resistencia, vec
 		elapsed = actual - start;
 		//cout << "time "<<elapsed << endl;
 	}	
-	S = populacio[0].decoder();
+	populacio[0].decoder(S);
 	return S.size();
 }
