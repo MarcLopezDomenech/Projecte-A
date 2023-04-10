@@ -4,7 +4,6 @@
 #include <stdlib.h>
 #include <algorithm>
 #include <math.h>
-//#include <random>
 
 using namespace std;
 
@@ -16,7 +15,7 @@ using namespace std;
 using VI = vector<int>;
 
 int metaheuristicaIC(const vector<VI>& graf, vector<int>& S, const double intconf, const double p) {
-	//cout << "Inici" << endl;
+	
 	srand(time(NULL));
 	G = graf;
 	probabilitat = p;
@@ -28,13 +27,12 @@ int metaheuristicaIC(const vector<VI>& graf, vector<int>& S, const double intcon
 	vector<Indv> populacio(Mida_Populacio);
 	int min = G.size() + 1;
 	int comptador = 0;
-	//cout << "ini 1.5" << endl;
+	
 	grau = vector<int> (G.size());
 	for (int i = 0; i < G.size(); ++i) {
 		grau[i] = G[i].size();
 	}
 
-	//cout << "ini2" << endl;
 
 	/* vector<float> first (G.size(), 0.5);
 	populacio[0] = Indv(first);
@@ -43,13 +41,11 @@ int metaheuristicaIC(const vector<VI>& graf, vector<int>& S, const double intcon
 		vector<float> aux(G.size());
 		for (int j = 0; j < G.size(); ++j) {
 			double number = ((double) rand() / (RAND_MAX));
-			//cout << number << endl;
 			aux[j] = number;
 		}
 		populacio[i] = Indv(aux);
 	}
 
-	//cout << "ini3" << endl;
 	
 	time_t start, actual, elapsed;
 	time(&start);
@@ -102,7 +98,7 @@ int metaheuristicaIC(const vector<VI>& graf, vector<int>& S, const double intcon
 		
 		time(&actual);
 		elapsed = actual - start;
-		//cout << "time "<<elapsed << endl;
+		
 	}	
 	populacio[0].decoder(S);
 	return S.size();

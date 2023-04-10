@@ -4,7 +4,6 @@
 #include <stdlib.h>
 #include <algorithm>
 #include <math.h>
-//#include <random>
 
 using namespace std;
 
@@ -85,7 +84,6 @@ void Indv::decoder(vector<int>& S) {
         }
         
 		while (n_act_fix < n) {
-            //cout << n_act_fix << endl;
             
             int imax = grau_nodes.top().second; grau_nodes.pop();
             while (A[imax]) {imax = grau_nodes.top().second; grau_nodes.pop();}
@@ -122,12 +120,11 @@ void Indv::decoder(vector<int>& S) {
 			}
 		}
 	}
-	//cout << "Tamany S: " << S.size() << endl;
 }
 
 
 int metaheuristicaLT(const vector<VI>& graf, const vector<int>& resistencia, vector<int>& S) {
-	//cout << "Inici" << endl;
+	
 	srand(time(NULL));
 
 	G = graf;
@@ -138,13 +135,12 @@ int metaheuristicaLT(const vector<VI>& graf, const vector<int>& resistencia, vec
 	vector<Indv> populacio(Mida_Populacio);
 	int min = G.size() + 1;
 	int comptador = 0;
-	//cout << "ini 1.5" << endl;
+
 	grau = vector<int> (G.size());
 	for (int i = 0; i < G.size(); ++i) {
 		grau[i] = G[i].size();
 	}
 
-	//cout << "ini2" << endl;
 
 	vector<float> first (G.size(), 1.0);
 	populacio[0] = Indv(first);
@@ -157,8 +153,6 @@ int metaheuristicaLT(const vector<VI>& graf, const vector<int>& resistencia, vec
 		}
 		populacio[i] = Indv(aux);
 	}
-
-	//cout << "ini3" << endl;
 	
 	time_t start, actual, elapsed;
 	time(&start);
@@ -211,7 +205,7 @@ int metaheuristicaLT(const vector<VI>& graf, const vector<int>& resistencia, vec
 		
 		time(&actual);
 		elapsed = actual - start;
-		//cout << "time "<<elapsed << endl;
+
 	}	
 	populacio[0].decoder(S);
 	return S.size();

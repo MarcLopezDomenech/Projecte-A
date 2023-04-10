@@ -48,10 +48,6 @@ int localSearchIC(const vector<VI>& G, vector<int>& S,const double interval, con
 			}
 		}
 	}
-	
-	/* vector<vector<bool>> J(N_JOCS,vector<bool>(tot,false));
-	vector<int> S_Activats(N_JOCS,0);
-	cout << aprox_esp(G,S,J,interval,probabilitat, S_Activats) << endl; */
 
 	return S.size();
 }

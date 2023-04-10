@@ -86,13 +86,6 @@ int main(int argc, char* argv[]) {
         if (alg == "greedy") {
             if (test_mode) cout << "Executant algorisme: " << alg << endl;
 
-            /* cout<<"Probabilidad"<<","<<"Medida del conjunto solución"<<","<<"Intervalo de confianza"<<endl;
-            for(c=0.1;c<1;c+=0.05){
-                for(intConf=0.1;intConf<1;intConf+=0.05){
-                    VI S(0);
-                    mida_S = greedyIC(G, S, intConf, c);
-                }
-            } */
             start = high_resolution_clock::now();
             mida_S = greedyIC(G, S, intConf, c);
             end = high_resolution_clock::now();
@@ -168,28 +161,3 @@ int main(int argc, char* argv[]) {
     }
     else cout << "ERROR: Retorn de l'algorisme i mida S no concorden" << endl;
 }
-
-    //CODIS QUE CRIDA
-    /*
-        %GREDDY, LOCALSERCH, HEURISTIC
-            %APROX_ESPERANÇA_GREEDY(graf G, nou S, Joc de prova J, interval de confiança) -> cond. complerta + EXTRA     //Treball Marc
-
-            %GREEDY_IC()-> varaibles de entrada ( graf G, ja activats S, interval de confiança, probabilitat, interval de confiança) -> S final  //FALTA
-            %GREEDY_LT()-> varaibles de entrada ( graf G, ja activats S) -> S final  //Treball Miquel
-                %DIFUSIÓ
-                    %DIFUSIO_IC() -> variables de entrada( graf G, ja activats S, nous S , probabilitat) -> quins nodes difosos     //CODI KAMIL
-                    %AGAFSAS EL NOMBRE DE nodes difosos SI IGUAL AL NOMBRE DE NODES TOTAL -> GRAF COMPLERT
-
-                    %DIFUSIO_LT() -> variables de entrada( graf G, ja activats S, nous S , llindar) -> nombre de nodes difosos      //CODI KAMIL
-                    %AGAFSAS EL NOMBRE DE nodes difosos SI IGUAL AL NOMBRE DE NODES TOTAL -> GRAF COMPLERT
-
-                %CODI SEGUIM EXECUTANT
-                    %CAS IC SI NOMBRE DE GRAFS COMPLERT >= A INTERVAL DE CONFIANÇA, PARA    //Treball Marc
-                    %CAS LT SI COMPLERT, PARA   //Treball Miquel
-    */
-
-    //SORTIDA
-    /*
-        %Retornaria S
-        %Tamany S
-    */

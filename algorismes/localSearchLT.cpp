@@ -48,9 +48,10 @@ int initRand(const vector<VI>& G, const vector<int>& R, vector<int>& S) {
 
 
 int localSearchLT(const vector<VI>& G, const vector<int>& R, vector<int>& S){ //Presuposa G (graf), R (resistencies).
+	//EXPERIMENT 3
 	//cout << "Rand: " << initRand(G, R, S) << endl;;
 	greedyLTgrau(G, R, S);
-	//cout << "MidaS_inicial: " << S.size() << endl;
+
 	cout<<"--------  Localsearch  --------"<<endl;
 	bool found = true;
 	int tot = G.size();

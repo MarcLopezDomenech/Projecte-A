@@ -12,7 +12,6 @@ double aprox_esp(const vector<VI>& G,const vector<int>& nousS,vector<vector<bool
     int fallada = n-necesaris;
     */
 
-    //cout<<n<<" "<<necesaris<<" "<<fallada<<endl;
 
     int contador=0;
 
@@ -33,7 +32,7 @@ double aprox_esp(const vector<VI>& G,const vector<int>& nousS,vector<vector<bool
         */
         ++ii;
     }
-    //cout<<contador <<" "<<n<<endl;
+    
     return double(contador)/double(n);
     
 }
