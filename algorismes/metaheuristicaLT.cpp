@@ -177,7 +177,7 @@ int metaheuristicaLT(const vector<VI>& graf, const vector<int>& resistencia, vec
 		vector<Indv> nova_gen;
 
 		//Elitisme
-		int elitisme = 24*Mida_Populacio/100;
+		int elitisme = 23*Mida_Populacio/100;
 		for (int i=0; i<elitisme; ++i) nova_gen.push_back(populacio[i]);
 
 		//Mutacio
@@ -201,7 +201,7 @@ int metaheuristicaLT(const vector<VI>& graf, const vector<int>& resistencia, vec
 			float p2 =elitisme + rand()%no_elit;
 			Indv i1 = populacio[p1];
 			Indv i2 = populacio[p2];
-			Indv fill = i1.crossover(i2, 0.69);
+			Indv fill = i1.crossover(i2, 0.7);
 			nova_gen.push_back(fill);
 		}
 
