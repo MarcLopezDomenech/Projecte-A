@@ -26,9 +26,32 @@ int localSearchLTWeighted(const vector<VI>& G, const vector<int>& R, vector<int>
 	return S.size();
 }
 
-int localSearchLT(const vector<VI>& G, const vector<int>& R, vector<int>& S){ //Presuposa G (graf), R (resistencies).
+int initRand(const vector<VI>& G, const vector<int>& R, vector<int>& S) {
+	    int n = G.size();
+    
+    vector<bool> ja_activats_S(n, false);
+    vector<int> act_reb_S(n, 0);
+    int i = 0;
+    int c = 0;
+    while (c != n){
 
+        
+		while (ja_activats_S[i]) ++i;
+		S.push_back(i);
+
+        vector<int> nous_activats;
+        c = difusioLTeficient2(G, R, S, c, act_reb_S,ja_activats_S, nous_activats);
+		
+    }
+	return S.size();
+}
+
+
+int localSearchLT(const vector<VI>& G, const vector<int>& R, vector<int>& S){ //Presuposa G (graf), R (resistencies).
+	//cout << "Rand: " << initRand(G, R, S) << endl;;
 	greedyLTgrau(G, R, S);
+	//cout << "MidaS_inicial: " << S.size() << endl;
+	cout<<"--------  Localsearch  --------"<<endl;
 	bool found = true;
 	int tot = G.size();
 	int imin = 0;
