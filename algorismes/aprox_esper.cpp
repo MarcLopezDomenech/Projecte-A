@@ -2,7 +2,7 @@
 
 using VI = vector<int>;
 
-double aprox_esp(const vector<VI>& G,const vector<int>& nousS,vector<vector<bool>>& J,double interval, double probabilitat, vector<int>&S_Activats){ //interval en tant per 1
+double aprox_esp(const vector<VI>& G,const vector<int>& nousS,vector<vector<bool>>& J,const double interval, const double probabilitat, vector<int>&S_Activats){ //interval en tant per 1
     int n=J.size();
     int nodes_tot=G.size();
     int ii=0;
